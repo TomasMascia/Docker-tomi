@@ -1,0 +1,50 @@
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    restart: no
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - /home/tomi-mascia/Código/my-app/app/certs:/etc/nginx/certs:ro
+      - /home/tomi-mascia/Código/my-app/app/vhostd:/etc/nginx/vhost.d
+      - /home/tomi-mascia/Código/my-app/app/html:/usr/share/nginx/html
+      - /home/tomi-mascia/Código/my-app/app/acme:/etc/acme.sh
+    environment:
+      - DEFAULT_HOST=tomi.ddns.net  
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: no
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+    volumes:
+      - /home/tomi-mascia/Código/my-app/app/certs:/etc/nginx/certs:rw
+      - /home/tomi-mascia/Código/my-app/app/vhostd:/etc/nginx/vhost.d
+      - /home/tomi-mascia/Código/my-app/app/html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /home/tomi-mascia/Código/my-app/app/acme:/etc/acme.sh
+
+  www:
+    image: nginx:alpine3.21
+    restart: no
+    expose:
+      - "80"
+    volumes:
+      - /home/tomi-mascia/Código/my-app/app:/usr/share/nginx/html:ro
+    environment:
+      - VIRTUAL_HOST=tomi.ddns.net,www.tomi.ddns.net
+      - LETSENCRYPT_HOST=tomi.ddns.net,www.tomi.ddns.net
+      - LETSENCRYPT_EMAIL=tomasgump6@gmail.com
+    depends_on:
+      - nginx-proxy
+      - letsencrypt
+
+volumes: 
+  certs:
+  html:
+  vhostd:
+  acme:
