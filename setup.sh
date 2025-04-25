@@ -57,13 +57,13 @@
             echo -e "\nEl usuario ya existe."
 
             if  getent group sudo | grep -qw "webexperto"; then
-                echo -e "\nwebexperto:super1" | chpasswd
+                echo "webexperto:super1" | chpasswd
                 echo "Tambien tiene permisos de root"
     
             else
 
                 echo "El usuario no tiene permisos le damos"
-                echo -e "\nwebexperto:super1" | chpasswd
+                echo "webexperto:super1" | chpasswd
                 usermod -aG sudo webexperto
             fi
 
@@ -252,7 +252,7 @@
         # Verificar si el usuario nginx ya existe
 
         if id "nginx" &> /dev/null; then
-            echo -e "\nginx:super2" | chpasswd
+            echo "nginx:super2" | chpasswd
             echo -e "El usuario nginx ya existe\n"
             
         else
@@ -260,7 +260,7 @@
             echo -e "Vamos a crear el usuario nginx\n"
 
             sudo adduser --disabled-password --gecos "" nginx
-            echo -e "\nginx:super2" | chpasswd
+            echo "nginx:super2" | chpasswd
             echo -e "EL usuario nginx se ha creado corerctamente\n"
 
         fi
