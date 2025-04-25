@@ -56,7 +56,7 @@
 
             echo -e "\nEl usuario ya existe."
 
-            if [ grep -qw "sudo" ]; then
+            if  grep -qw "sudo" ; then
 
                 echo "Tambien tiene permisos de root"
             else
@@ -98,7 +98,7 @@
 
         else
 
-            -e "El sistema se encuentra actualizado en su totalidad"
+            echo -e "El sistema se encuentra actualizado en su totalidad\n"
 
         fi
 
