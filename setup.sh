@@ -57,13 +57,21 @@
             echo -e "\nEl usuario ya existe."
 
             if  getent group sudo | grep -qw "webexperto"; then
+<<<<<<< HEAD
                 
+=======
+                echo "webexperto:super1" | chpasswd
+>>>>>>> 766a2d3c5848e2262508f1d8b56709644493b96d
                 echo "Tambien tiene permisos de root"
                 echo -e "\nwebexperto:super1" | chpasswd
             else
 
                 echo "El usuario no tiene permisos le damos"
+<<<<<<< HEAD
                 echo -e "\nwebexperto:super1" | chpasswd
+=======
+                echo "webexperto:super1" | chpasswd
+>>>>>>> 766a2d3c5848e2262508f1d8b56709644493b96d
                 usermod -aG sudo webexperto
             fi
 
@@ -78,7 +86,11 @@
             # Le coloco contraseña al usuario webexperto
 
             echo -e "\nwebexperto:super1" | chpasswd
+<<<<<<< HEAD
             echo -e "\nLa contraseña de webexperto es super1"
+=======
+            echo -e "\nLa contraseña de webexperto es superusuario1"
+>>>>>>> 766a2d3c5848e2262508f1d8b56709644493b96d
 
             # Ademas le agregamos permisos de sudo
 
@@ -252,15 +264,15 @@
         # Verificar si el usuario nginx ya existe
 
         if id "nginx" &> /dev/null; then
-
+            echo "nginx:super2" | chpasswd
             echo -e "El usuario nginx ya existe\n"
-
+            
         else
 
             echo -e "Vamos a crear el usuario nginx\n"
 
             sudo adduser --disabled-password --gecos "" nginx
-
+            echo "nginx:super2" | chpasswd
             echo -e "EL usuario nginx se ha creado corerctamente\n"
 
         fi
@@ -268,9 +280,9 @@
         # Valida si se encuentra en el grupo de docker, en caso de no estar, lo agrega
 
         if id -nG nginx | grep -qw docker; then
-
+            
             echo -e "El usuario nginx se encuentra en el grupo de 'docker'\n"
-
+            
         else
 
             # En caso de no estar lo agrego al grupo 'docker' 
