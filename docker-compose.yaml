@@ -1,6 +1,6 @@
 services:
   nginx-proxy:
-    image: jwilder/nginx-proxy
+    itc/acme.shmage: jwilder/nginx-proxy
     restart: always
     ports:
       - "80:80"
@@ -11,8 +11,6 @@ services:
       - /home/tomi-mascia/Código/my-app/app/vhostd:/etc/nginx/vhost.d
       - /home/tomi-mascia/Código/my-app/app/html:/usr/share/nginx/html
       - /home/tomi-mascia/Código/my-app/app/acme:/etc/acme.sh
-    environment:
-      - DEFAULT_HOST=tomi.ddns.net  
     labels:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
 
@@ -34,7 +32,7 @@ services:
     expose:
       - "80"
     volumes:
-      - /home/tomi-mascia/Código/my-app/app:/usr/share/nginx/html:ro
+      - ./app:/usr/share/nginx/html:ro
     environment:
       - VIRTUAL_HOST=tomi.ddns.net,www.tomi.ddns.net
       - LETSENCRYPT_HOST=tomi.ddns.net,www.tomi.ddns.net
@@ -43,7 +41,7 @@ services:
       - nginx-proxy
       - letsencrypt
 
-volumes: 
+volumes:
   certs:
   html:
   vhostd:
