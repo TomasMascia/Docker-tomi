@@ -42,7 +42,7 @@
 
         NUEVO_HOSTNAME="bootcampwebexperto"
 
-        echo "Cambiando hostname a :'$NUEVO_HOSTNAME'"
+        echo "Cambiando hostname a :$NUEVO_HOSTNAME"
 
         hostnamectl set-hostname $NUEVO_HOSTNAME
 
@@ -56,9 +56,10 @@
 
             echo -e "\nEl usuario ya existe."
 
-            if  grep -qw "sudo" ; then
+            if  getent group sudo | grep -qw "webexperto"; then
 
                 echo "Tambien tiene permisos de root"
+    
             else
 
                 echo "El usuario no tiene permisos le damos"
