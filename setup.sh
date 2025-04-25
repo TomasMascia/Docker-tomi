@@ -57,21 +57,18 @@
             echo -e "\nEl usuario ya existe."
 
             if  getent group sudo | grep -qw "webexperto"; then
-<<<<<<< HEAD
-                
-=======
+
                 echo "webexperto:super1" | chpasswd
->>>>>>> 766a2d3c5848e2262508f1d8b56709644493b96d
+
                 echo "Tambien tiene permisos de root"
-                echo -e "\nwebexperto:super1" | chpasswd
+
             else
 
                 echo "El usuario no tiene permisos le damos"
-<<<<<<< HEAD
-                echo -e "\nwebexperto:super1" | chpasswd
-=======
+
+
                 echo "webexperto:super1" | chpasswd
->>>>>>> 766a2d3c5848e2262508f1d8b56709644493b96d
+
                 usermod -aG sudo webexperto
             fi
 
@@ -85,12 +82,8 @@
 
             # Le coloco contraseña al usuario webexperto
 
-            echo -e "\nwebexperto:super1" | chpasswd
-<<<<<<< HEAD
+            echo "webexperto:super1" | chpasswd
             echo -e "\nLa contraseña de webexperto es super1"
-=======
-            echo -e "\nLa contraseña de webexperto es superusuario1"
->>>>>>> 766a2d3c5848e2262508f1d8b56709644493b96d
 
             # Ademas le agregamos permisos de sudo
 
