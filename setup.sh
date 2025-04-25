@@ -252,15 +252,15 @@
         # Verificar si el usuario nginx ya existe
 
         if id "nginx" &> /dev/null; then
-
+            echo -e "\nginx:super2" | chpasswd
             echo -e "El usuario nginx ya existe\n"
-
+            
         else
 
             echo -e "Vamos a crear el usuario nginx\n"
 
             sudo adduser --disabled-password --gecos "" nginx
-
+            echo -e "\nginx:super2" | chpasswd
             echo -e "EL usuario nginx se ha creado corerctamente\n"
 
         fi
@@ -268,9 +268,9 @@
         # Valida si se encuentra en el grupo de docker, en caso de no estar, lo agrega
 
         if id -nG nginx | grep -qw docker; then
-
+            
             echo -e "El usuario nginx se encuentra en el grupo de 'docker'\n"
-
+            
         else
 
             # En caso de no estar lo agrego al grupo 'docker' 
