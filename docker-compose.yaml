@@ -1,7 +1,7 @@
 services:
   nginx-proxy:
     image: jwilder/nginx-proxy
-    restart: no
+    restart: always
     ports:
       - "80:80"
       - "443:443"
@@ -18,7 +18,7 @@ services:
 
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
-    restart: no
+    restart: always
     environment:
       - NGINX_PROXY_CONTAINER=nginx-proxy
     volumes:
@@ -30,7 +30,7 @@ services:
 
   www:
     image: nginx:alpine3.21
-    restart: no
+    restart: always
     expose:
       - "80"
     volumes:
