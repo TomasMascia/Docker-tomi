@@ -7,10 +7,10 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - /home/nginx/Docker-tomi/app/certs:/etc/nginx/certs:ro
-      - /home/nginx/Docker-tomi/app/vhostd:/etc/nginx/vhost.d
-      - /home/nginx/Docker-tomi/app/html:/usr/share/nginx/html
-      - /home/nginx/Docker-tomi/app/acme:/etc/acme.sh
+      - /home/nginx/Docker-tomi/certs:/etc/nginx/certs:ro
+      - /home/nginx/Docker-tomi/vhostd:/etc/nginx/vhost.d
+      - /home/nginx/Docker-tomi/html:/usr/share/nginx/html
+      - /home/nginx/Docker-tomi/acme:/etc/acme.sh
     labels:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
 
@@ -20,11 +20,11 @@ services:
     environment:
       - NGINX_PROXY_CONTAINER=nginx-proxy
     volumes:
-      - /home/nginx/Docker-tomi/app/certs:/etc/nginx/certs:rw
-      - /home/nginx/Docker-tomi/app/vhostd:/etc/nginx/vhost.d
-      - /home/nginx/Docker-tomi/app/html:/usr/share/nginx/html
+      - /home/nginx/Docker-tomi/certs:/etc/nginx/certs:rw
+      - /home/nginx/Docker-tomi/vhostd:/etc/nginx/vhost.d
+      - /home/nginx/Docker-tomi/html:/usr/share/nginx/html
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /home/nginx/Docker-tomi/app/acme:/etc/acme.sh
+      - /home/nginx/Docker-tomi/acme:/etc/acme.sh
 
   www:
     image: nginx:alpine3.21
@@ -34,8 +34,8 @@ services:
     volumes:
       - ./app:/usr/share/nginx/html:ro
     environment:
-      - VIRTUAL_HOST=tomi.ddns.net
-      - LETSENCRYPT_HOST=tomi.ddns.net
+      - VIRTUAL_HOST=tomimascia.ddns.net
+      - LETSENCRYPT_HOST=tomimascia.ddns.net
       - LETSENCRYPT_EMAIL=tomasgump6@gmail.com
     depends_on:
       - nginx-proxy
